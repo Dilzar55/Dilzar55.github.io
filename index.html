@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraClient | A modpack for modern versions of Minecraft!</title>
+    <title>UltraClient | Minecraft that feels like it's truly built just for you.</title>
     
-    <!-- Einbindung der Minecraft-Schriftart und Google Fonts -->
+    <!-- Original Minecraft Pixel-Schriftart -->
     <link href="https://cdnfonts.com" rel="stylesheet">
+    <!-- Cleanere Schriftart für die Untertexte -->
     <link href="https://googleapis.com" rel="stylesheet">
-    <!-- FontAwesome für Icons -->
+    <!-- Icons für den Download und TikTok -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
-        /* Lunar Client Layout Nachbau */
+        /* 1:1 NoRisk Client Minimalist Layout */
         * {
             margin: 0;
             padding: 0;
@@ -20,197 +21,156 @@
             user-select: none;
         }
         body {
-            background-color: #0b0b0d;
+            background-color: #09090b; /* Tiefschwarzer, edler Hintergrund */
             color: #ffffff;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* 🌲 Epischer Minecraft Shader Hintergrund im Lunar-Stil */
-        .lunar-hero-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Hochauflösendes Minecraft Nacht-Shader Bild */
-            background: linear-gradient(rgba(11, 11, 13, 0.4), rgba(11, 11, 13, 0.75)), 
-                        url('https://unsplash.com') no-repeat center center;
-            background-size: cover;
-            z-index: -1;
-            filter: brightness(0.85) contrast(1.05);
-        }
-
-        /* 📱 Die originale obere Menüleiste (Navbar) */
+        /* 📱 Die minimalistische obere Leiste */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 70px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 6%;
-            background: #111115;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px 6%;
             z-index: 100;
         }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-box {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #8c52ff, #451a99);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Minecraftia', sans-serif;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #ffffff;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .logo-title {
-            font-family: 'Minecraftia', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 0.5px;
-            color: #ffffff;
-        }
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-        }
-        .nav-links a {
-            color: #a3a3a3;
+        .menu-btn {
+            color: #a1a1aa;
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: color 0.2s;
+            cursor: pointer;
         }
-        .nav-links a:hover {
+        .menu-btn:hover {
             color: #ffffff;
-        }
-        .nav-links .locked {
-            color: #4a4a4f;
-            cursor: not-allowed;
         }
 
-        /* 👑 Zentrierter Hauptbereich (Hero) */
-        .hero-content {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* ⚡ Das leuchtende Blitz-Symbol oben in der Mitte */
+        .top-flash {
+            font-size: 1.5rem;
+            color: #9333ea;
+            filter: drop-shadow(0 0 10px rgba(147, 51, 234, 0.6));
+            animation: flashPulse 3s infinite ease-in-out;
+        }
+
+        @keyframes flashPulse {
+            0% { opacity: 0.6; filter: drop-shadow(0 0 5px rgba(147, 51, 234, 0.4)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 15px rgba(147, 51, 234, 0.9)); }
+            100% { opacity: 0.6; filter: drop-shadow(0 0 5px rgba(147, 51, 234, 0.4)); }
+        }
+
+        /* 👑 Haupt-Inhaltsbereich (Zentriert) */
+        .main-content {
             text-align: center;
             padding: 0 20px;
+            max-width: 800px;
+            margin-top: 40px;
         }
 
-        /* Großer Minecraft-Titel */
-        .hero-content h1 {
+        /* Genaue Minecraft-Schriftart-Anordnung wie bei NoRisk */
+        .main-content h1 {
             font-family: 'Minecraftia', sans-serif;
-            font-size: 4.2rem;
+            font-size: 2.8rem;
+            line-height: 1.4;
+            font-weight: normal;
             color: #ffffff;
-            margin-bottom: 5px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
-            letter-spacing: -1px;
-        }
-
-        /* Slogan unter der Überschrift */
-        .hero-content p {
-            color: #e2e8f0;
-            font-size: 1.1rem;
-            font-weight: 400;
-            margin-bottom: 35px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
-        }
-
-        /* 🎯 Die beiden Hauptbuttons genau wie Lunar */
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
         }
         
-        .btn-download {
-            background-color: #3b82f6;
+        /* Das lila leuchtende Wort am Ende des Satzes */
+        .purple-glow-text {
+            color: #a855f7;
+            text-shadow: 0 0 25px rgba(168, 85, 247, 0.45);
+        }
+
+        /* Kleiner, eleganter Untertext */
+        .main-content p {
+            color: #71717a;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 520px;
+            margin: 0 auto 45px auto;
+        }
+
+        /* 🎯 Die NoRisk Style Buttons */
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-norisk {
+            background-color: #9333ea;
             color: #ffffff;
-            padding: 14px 28px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 14px 32px;
             border: none;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            border-radius: 30px; /* Perfekt abgerundet wie auf dem Bild */
             cursor: not-allowed;
             display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            transition: background-color 0.2s;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
         }
 
-        .btn-tiktok {
-            background-color: #ffffff;
-            color: #111115;
-            padding: 14px 28px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .btn-tiktok-sub {
+            color: #71717a;
             text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 5px;
         }
-        .btn-tiktok:hover {
-            background-color: #f3f4f6;
-            transform: translateY(-2px);
+        .btn-tiktok-sub:hover {
+            color: #ff0050;
+            text-shadow: 0 0 10px rgba(255, 0, 80, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <!-- Lunar Background -->
-    <div class="lunar-hero-bg"></div>
-
-    <!-- Menüleiste ganz oben -->
+    <!-- Minimalistische Leiste oben -->
     <nav>
-        <div class="logo-area">
-            <div class="logo-box">U</div>
-            <div class="logo-title">ULTRA CLIENT</div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Store</a></li>
-            <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Cosmetics</a></li>
-            <li><a href="https://tiktok.com" target="_blank">TikTok</a></li>
-        </ul>
+        <div class="menu-btn"><i class="fa-solid fa-bars"></i> Menu</div>
+        <!-- Der originale leuchtende NoRisk Blitz -->
+        <div class="top-flash"><i class="fa-solid fa-bolt"></i></div>
+        <div style="width: 70px;"></div> <!-- Ausgleich für das Layout links -->
     </nav>
 
-    <!-- Hauptbereich Mitte -->
-    <div class="hero-content">
-        <h1>ULTRA CLIENT</h1>
-        <p>A modpack for all modern versions of Minecraft!</p>
+    <!-- Hauptinhalt genau im Stil des Screenshots -->
+    <div class="main-content">
+        <h1>Minecraft that feels like it's truly <span class="purple-glow-text">built just for you.</span></h1>
+        <p>Everything you need to make Minecraft feel fresh, personal, and exciting again.</p>
         
-        <div class="btn-group">
-            <button class="btn-download" onclick="alert('Wir programmieren den Launcher aktuell im Hintergrund! Alle Infos auf TikTok!')">
-                <i class="fa-solid fa-download"></i> Download
+        <div class="button-wrapper">
+            <!-- Großer, abgerundeter Hauptbutton -->
+            <button class="btn-norisk" onclick="alert('UltraClient wird aktuell im Hintergrund programmiert! Verfolge die Updates auf TikTok!')">
+                <i class="fa-solid fa-download"></i> Start Playing
             </button>
-            <a href="https://tiktok.com" target="_blank" class="btn-tiktok">
-                <i class="fa-brands fa-tiktok"></i> TikTok Store
+            
+            <!-- Eleganter TikTok-Link darunter -->
+            <a href="https://tiktok.com" target="_blank" class="btn-tiktok-sub">
+                <i class="fa-brands fa-tiktok"></i> Follow @ultraclient2026 for Dev-Logs
             </a>
         </div>
     </div>
