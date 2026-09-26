@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UltraClient | Next-Gen Minecraft Launcher</title>
     
-    <!-- 🖼️ HIER WIRD DEIN LOGO OBEN IM BROWSER-TAB EINGEBUNDEN -->
-    <img src="logo.png" alt="UltraClient" class="nav-logo-img">
-    
     <!-- Schriftarten & Icons -->
     <link href="https://cdnfonts.com" rel="stylesheet">
     <link href="https://googleapis.com" rel="stylesheet">
@@ -76,17 +73,27 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
-        /* 🖼️ LOGO OBEN LINKS AUF DER WEBSEITE */
-        .nav-logo-img {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: 2px solid #8c52ff;
-            box-shadow: 0 0 15px rgba(140, 82, 255, 0.6);
-            object-fit: cover;
+        
+        /* 🟪 COOLE NEON-PIXEL-U LOGO BOX */
+        .nav-logo-box {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #8c52ff, #451a99);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffffff;
+            border: 2px solid #00d4ff;
+            box-shadow: 0 0 20px rgba(140, 82, 255, 0.7);
+            text-shadow: 0 0 8px #00d4ff;
         }
+        
         .logo-text {
             font-family: 'Syncopate', sans-serif;
             font-size: 1.3rem;
@@ -255,33 +262,29 @@
 </head>
 <body>
 
-    <!-- Kosmische Effekte -->
     <div class="cosmic-bg"></div>
     <div class="stars-overlay"></div>
 
-    <!-- 📱 Obere Navigationsleiste mit Logo -->
     <nav>
         <div class="logo-container">
-            <!-- DEIN LOGO LINKS IN DER BAR -->
-            <img src="logo.png" alt="UltraClient" class="nav-logo-img">
+            <!-- 🟪 HIER IST JETZT DAS DEFENITIVE COODE PIXEL U -->
+            <div class="nav-logo-box">U</div>
             <span class="logo-text">UltraClient</span>
         </div>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Cosmetics</a></li>
             <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Store</a></li>
-            <li><a href="https://www.tiktok.com/@ultraclient2026" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a></li>
+            <li><a href="https://tiktok.com" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a></li>
         </ul>
     </nav>
 
-    <!-- 👑 Hauptseite -->
     <div class="hero">
-        <div class="cyber-badge">Coming Soon</div>
+        <div class="cyber-badge">🛸 Alpha Phase Gestartet</div>
         <h1>UltraClient</h1>
         <p>Der fortschrittlichste Minecraft Launcher der nächsten Generation. Erlebe maximale Stabilität, ein cleanes Interface und exklusive Cosmetics.</p>
         
         <div class="btn-group">
             <button class="btn-launcher" onclick="alert('Unser Entwickler-Team codet den Launcher gerade im Hintergrund!')">
-                <i class="fa-solid fa-gears"></i> LAUNCHER IN ARBEIT
-            </button>
+
 
