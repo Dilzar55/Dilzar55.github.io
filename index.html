@@ -8,301 +8,6 @@
   <!-- Das U-Logo Favicon mit Magenta-Lila Farbverlauf -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23d946ef'/><stop offset='100%' stop-color='%238b5cf6'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='url(%23grad1)'/><text x='50' y='72' font-size='65' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='white'>U</text></svg>">
   
-  <!-- Modernste Tech-Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
-  
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg-dark: #040407;
-      --card-bg: rgba(12, 13, 22, 0.75);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --pink: #d946ef;
-      --purple: #8b5cf6;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --glow-pink: rgba(217, 70, 239, 0.4);
-    }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Interactive Canvas Background */
-    #particle-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      pointer-events: none;
-    }
-
-    .bg-grid {
-      position: fixed;
-      inset: 0;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Header Navigation */
-    header {
-      width: 100%;
-      max-width: 1200px;
-      padding: 24px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.3rem;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      color: var(--text-main);
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: #fff;
-      box-shadow: 0 0 25px var(--glow-pink);
-    }
-
-    .nav-btn {
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      transition: all 0.25s ease;
-    }
-
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: var(--pink);
-      box-shadow: 0 0 15px var(--glow-pink);
-      transform: translateY(-2px);
-    }
-
-    /* Main Container */
-    main {
-      width: 100%;
-      max-width: 1100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 60px 20px;
-      z-index: 1;
-    }
-
-    /* Status Badge */
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 20px;
-      border-radius: 9999px;
-      background: rgba(217, 70, 239, 0.1);
-      border: 1px solid rgba(217, 70, 239, 0.3);
-      color: #f472b6;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      box-shadow: 0 0 20px rgba(217, 70, 239, 0.15);
-    }
-
-    .status-pulse {
-      width: 8px;
-      height: 8px;
-      background-color: #f472b6;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #f472b6;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.7); }
-    }
-
-    /* Title */
-    .hero-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 0.95;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #ffffff 30%, #f472b6 70%, #8b5cf6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 35px rgba(217, 70, 239, 0.3));
-    }
-
-    .hero-description {
-      max-width: 680px;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-    }
-
-    /* Buttons */
-    .cta-group {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 70px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 34px;
-      border-radius: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      border: none;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--pink), var(--purple));
-      color: #ffffff;
-      box-shadow: 0 6px 30px var(--glow-pink);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 10px 40px rgba(217, 70, 239, 0.6);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(12px);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-3px);
-    }
-
-    /* 3D Feature Cards Grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      width: 100%;
-      perspective: 1000px;
-    }
-
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 36px 28px;
-      text-align: left;
-      transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(16px);
-      position: relative;
-      transform-style: preserve-3d;
-    }
-
-    .feature-card:hover {
-      border-color: rgba(217, 70, 239, 0.5);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px var(--glow-pink);
-    }
-
-    .icon-wrapper {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: rgba(217, 70, 239, 0.12);
-      border: 1px solid rgba(217, 70, 239, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 22px;
-      color: var(--pink);
-      box-shadow: 0 0 20px var(--glow-pink);
-    }
-
-    .feature-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text-main);
-    }
-
-    .feature-card p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--text-muted);
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UltraClient — Next-Gen Minecraft Client</title>
-  
-  <!-- Das U-Logo Favicon mit Magenta-Lila Farbverlauf -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23d946ef'/><stop offset='100%' stop-color='%238b5cf6'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='url(%23grad1)'/><text x='50' y='72' font-size='65' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='white'>U</text></svg>">
-  
   <!-- Tech-Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -536,7 +241,7 @@
       transform: translateY(-3px);
     }
 
-    /* Clean 2D Feature Cards Grid */
+    /* Feature Cards Grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -588,24 +293,57 @@
       color: var(--text-muted);
     }
 
-    /* Footer */
+    /* Neu gestalteter Footer */
     footer {
       width: 100%;
-      max-width: 1200px;
-      padding: 35px 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      max-width: 1100px;
+      padding: 24px 20px;
+      margin-top: 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 0.85rem;
       color: var(--text-muted);
       z-index: 10;
+      gap: 16px;
     }
 
-    footer a {
-      color: var(--pink);
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: 600;
+      font-size: 0.8rem;
+      font-family: monospace;
+      transition: all 0.25s ease;
+    }
+
+    .footer-badge:hover, .footer-badge:visited:hover {
+      color: var(--pink);
+      border-color: rgba(217, 70, 239, 0.4);
+      box-shadow: 0 0 15px rgba(217, 70, 239, 0.2);
+    }
+
+    .footer-badge:visited {
+      color: var(--text-muted);
     }
 
     @media (max-width: 868px) {
@@ -636,7 +374,7 @@
       UltraClient
     </a>
     
-    <a href="https://www.tiktok.com/@ultraclient2026" target="_blank" class="nav-btn">
+    <a href="https://www.tiktok.com" target="_blank" class="nav-btn">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.22V8.2a6.34 6.34 0 0 0-5.1 6.27 6.34 6.34 0 0 0 10.8 4.49 6.27 6.27 0 0 0 1.87-4.49V8.55a8.3 8.3 0 0 0 4.54 1.34V6.45a4.86 4.86 0 0 1-2-.24z"/>
       </svg>
@@ -648,7 +386,7 @@
   <main>
     <div class="status-badge">
       <span class="status-pulse"></span>
-      IN ARBEIT &bull; DEVELOPMENT
+      IN ARBEIT &bull; ALPHA PHASE
     </div>
 
     <h1 class="hero-title">ULTRA CLIENT</h1>
@@ -723,10 +461,16 @@
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- Moderner Footer -->
   <footer>
-    <div>&copy; 2026 UltraClient. Alle Rechte vorbehalten.</div>
-    <div>Offizielle Website: <a href="https://dilzar55.github.io/#" target="_blank">dilzar55.github.io</a></div>
+    <div class="footer-left">
+      <span class="footer-brand">&copy; 2026 UltraClient</span>
+      <span>&bull; Alle Rechte vorbehalten.</span>
+    </div>
+    
+    <a href="https://dilzar55.github.io/" target="_blank" class="footer-badge">
+      🌐 dilzar55.github.io
+    </a>
   </footer>
 
   <!-- Partikel Hintergrund Script -->
