@@ -172,147 +172,362 @@
       gap: 8px;
       border: none;
     }
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UltraClient - Performance & PvP</title>
+    <style>
+        /* --- GRUNDSTELLUNGEN (Reset & Fonts) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
-    .btn-primary {
-      background: var(--primary-grad);
-      color: #ffffff;
-      box-shadow: 0 8px 30px var(--accent-glow);
-    }
+        :root {
+            --bg-color: #050509; /* Sehr dunkles Blau/Schwarz */
+            --accent-purple: #a855f7;
+            --accent-pink: #ec4899;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(17, 17, 27, 0.6); /* Transparente Karten */
+            --glow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(236, 72, 153, 0.4);
-      opacity: 0.95;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
 
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.03);
-      color: #ffffff;
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(10px);
-    }
+        /* --- HINTERGRUND-EFFEKTE (Neon-Kristalle & Code) --- */
+        /* Wir nutzen Pseudo-Elemente, um die Kristalle ohne Bilddateien zu simulieren */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -2;
+            opacity: 0.15;
+        }
 
-    .btn-outline:hover {
-      background: rgba(236, 72, 153, 0.1);
-      border-color: rgba(236, 72, 153, 0.4);
-      transform: translateY(-2px);
-      color: #f472b6;
-    }
+        body::before {
+            background: var(--accent-purple);
+            top: 10%;
+            left: -100px;
+        }
 
-    /* Feature Cards */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      width: 100%;
-      max-width: 1100px;
-      padding: 0 24px 100px 24px;
-      z-index: 10;
-    }
+        body::after {
+            background: var(--accent-pink);
+            bottom: 10%;
+            right: -100px;
+        }
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 32px;
-      backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+        /* Simulierter Code-Hintergrund */
+        .code-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: rgba(168, 85, 247, 0.03); /* Extrem subtil */
+            white-space: pre;
+            pointer-events: none;
+            z-index: -1;
+            padding: 20px;
+            overflow: hidden;
+        }
 
-    .card:hover {
-      border-color: var(--card-hover-border);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
+        /* --- HEADER & LOGO --- */
+        header {
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
 
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: -0.3px;
-    }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #f1f5f9;
+        }
 
-    .card-text {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+        }
 
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 40px;
-      }
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      .button-group {
-        flex-direction: column;
-        width: 100%;
-      }
-      .btn {
-        width: 100%;
-      }
-    }
-  </style>
+        /* --- HERO SECTION (Mitte) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            padding-top: 80px; /* Platz für Header */
+        }
+
+        .status-badge {
+            background: rgba(236, 72, 153, 0.1);
+            color: var(--accent-pink);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-badge::before {
+            content: "✦"; /* Kleiner Stern */
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-pink), #ff80b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.3));
+        }
+
+        .description-box {
+            max-width: 650px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 20px;
+            border-radius: 12px;
+            color: #cbd5e1;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* --- BUTTONS --- */
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 80px; /* Abstand zu den Karten */
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-pink));
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #1a1a2e;
+            color: var(--text-main);
+            border: 1px solid #2e2e4d;
+        }
+
+        .btn-secondary:hover {
+            background: #252542;
+        }
+
+        /* --- FEATURES SECTION (Karten) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 20px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: var(--glow);
+        }
+
+        /* Neon-Icons (simuliert mit CSS-Formen und Text) */
+        .icon-container {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--accent-purple));
+        }
+
+        /* Spezifische Icons mit CSS */
+        .icon-performance { color: #60a5fa; } /* Blau */
+        .icon-allocator { color: #a855f7; }   /* Lila */
+        .icon-cosmetics { color: #ec4899; }   /* Pink */
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- RESPONSIVE DESIGN (Handy-Anpassungen) --- */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            .description-box {
+                font-size: 0.9rem;
+            }
+            header {
+                padding: 15px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="glow-bg"></div>
+    <!-- Hintergrund Code-Effekt -->
+    <div class="code-bg">
+import minecraft.client.Minecraft;
+import minecraft.performance.Optimizer;
 
-  <!-- Header -->
-  <header>
-    <a href="#" class="brand">
-      <div class="brand-icon">U</div>
-      <span class="brand-name">UltraClient</span>
-    </a>
-  </header>
-
-  <!-- Hero -->
-  <main class="hero">
-    <div class="badge">
-      <span class="badge-dot"></span>
-        In Arbeit
+// Init UltraClient Core
+public class UltraClient {
+    public static void main(String[] args) {
+        System.out.println("Loading UltraClient...");
+        Optimizer.patchRenderingPipeline();
+        Optimizer.optimizeMemoryAllocation();
+        Minecraft.getGLContext().enableLudicrousFPS();
+        // Graphics Pipeline Hook
+        // Memory Cleaner active
+        // Cosmetic Engine loaded
+    }
+}
     </div>
 
-    <h1 class="hero-title">Ultra Client</h1>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">U</div>
+            UltraClient
+        </div>
+    </header>
 
-    <p class="hero-desc">
-      Der ultimative Performance- & PvP-Client für Minecraft. Maximale FPS, 
-      clevere Quality-of-Life-Features und ein cleanes Design für das beste Spielerlebnis.
-    </p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="status-badge">In Arbeit</div>
+        <h1 class="main-title">ULTRA CLIENT</h1>
+        
+        <div class="description-box">
+            Der ultimative Performance- & PvP-Client für Minecraft. Maximale FPS, 
+            clevere Quality-of-Life-Features und ein cleanes Design für das beste Spielerlebnis.
+        </div>
 
-    <div class="button-group">
-      <button class="btn btn-primary">Coming Soon</button>
-      <a href="https://www.tiktok.com/@ultraclient2026" target="_blank" rel="noopener noreferrer" class="btn btn-outline">TikTok</a>
-    </div>
-  </main>
+        <div class="cta-group">
+            <button class="btn btn-primary">Coming Soon</button>
+            <a href="#" class="btn btn-secondary">TikTok</a>
+        </div>
 
-  <!-- Features Grid -->
-  <section class="features-grid">
-    <div class="card">
-      <h3 class="card-title">Hyper Performance</h3>
-      <p class="card-text">
-        Unsere Core-Engine restrukturiert Grafik-Pipelines im Hintergrund, um FPS-Spikes komplett zu eliminieren.
-      </p>
-    </div>
+        <!-- Features Grid -->
+        <div class="features-grid">
+            
+            <!-- Karte 1 -->
+            <div class="feature-card">
+                <div class="icon-container icon-performance">
+                    <!-- Einfaches Tacho-Symbol mit Text -->
+                    ⏱️
+                </div>
+                <h3 class="card-title">Hyper Performance</h3>
+                <p class="card-text">
+                    Unsere Core-Engine restrukturiert Grafik-Pipelines im Hintergrund, um FPS-Spikes komplett zu eliminieren.
+                </p>
+            </div>
 
-    <div class="card">
-      <h3 class="card-title">Smart Allocator</h3>
-      <p class="card-text">
-        Intelligente Speicherbereinigung blockiert unnötige Java-Prozesse und sorgt für ein ruckelfreies Erlebnis.
-      </p>
-    </div>
+            <!-- Karte 2 -->
+            <div class="feature-card">
+                <div class="icon-container icon-allocator">
+                    <!-- Einfaches Chip-Symbol -->
+                    🔲
+                </div>
+                <h3 class="card-title">Smart Allocator</h3>
+                <p class="card-text">
+                    Intelligente Speicherbereinigung blockiert unnötige Java-Prozesse und sorgt für ein ruckelfreies Erlebnis.
+                </p>
+            </div>
 
-    <div class="card">
-      <h3 class="card-title">Cosmetics Layer</h3>
-      <p class="card-text">
-        Ein eigenständiges Render-System lädt zukünftige Capes und Flügel direkt auf die Minecraft-Engine.
-      </p>
-    </div>
-  </section>
+            <!-- Karte 3 -->
+            <div class="feature-card">
+                <div class="icon-container icon-cosmetics">
+                    <!-- Einfaches Flügel-Symbol -->
+                    👐
+                </div>
+                <h3 class="card-title">Cosmetics Layer</h3>
+                <p class="card-text">
+                    Ein eigenständiges Render-System lädt zukünftige Capes und Flügel direkt auf die Minecraft-Engine.
+                </p>
+            </div>
+
+        </div>
+    </section>
 
 </body>
 </html>
