@@ -1,533 +1,447 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UltraClient — The Ultimate Minecraft Experience</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UltraClient — Next-Gen Minecraft Client</title>
+  
+  <!-- Schriftart Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <style>
-    :root {
-      --bg: #090a0f;
-      --card-bg: rgba(18, 20, 29, 0.6);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover-border: rgba(217, 70, 239, 0.3);
-      --primary-grad: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
-      --accent-glow: rgba(168, 85, 247, 0.3);
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --font: 'Inter', system-ui, -apple-system, sans-serif;
-    }
-
-    * {
+    /* Reset & CSS Variablen */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    :root {
+      --bg-dark: #07080c;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(217, 70, 239, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-pink: #d946ef;
+      --accent-purple: #8b5cf6;
+      --glow-gradient: linear-gradient(135deg, #d946ef, #8b5cf6);
+    }
+
     body {
-      background-color: var(--bg);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-dark);
       color: var(--text-main);
-      font-family: var(--font);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between;
       overflow-x: hidden;
       position: relative;
+      padding: 0 20px;
     }
 
-    /* Background Glow (Lila / Rosa) */
-    .glow-bg {
-      position: absolute;
+    /* Subtile Hintergrund-Glow-Effekte */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .bg-glow-top {
+      position: fixed;
       top: -150px;
       left: 50%;
       transform: translateX(-50%);
-      width: 750px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(236, 72, 153, 0.12) 50%, rgba(0, 0, 0, 0) 75%);
-      filter: blur(80px);
+      width: 700px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(217, 70, 239, 0.2) 0%, rgba(139, 92, 246, 0.1) 50%, transparent 70%);
+      filter: blur(100px);
+      z-index: -1;
       pointer-events: none;
-      z-index: 0;
     }
 
-    /* Header / Navbar */
+    /* Header Navigation */
     header {
       width: 100%;
       max-width: 1100px;
-      padding: 24px 32px;
+      padding: 24px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 10;
     }
 
-    .brand {
+    .logo {
       display: flex;
       align-items: center;
       gap: 12px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
       text-decoration: none;
+      color: var(--text-main);
     }
 
-    .brand-icon {
-      width: 38px;
-      height: 38px;
-      background: var(--primary-grad);
+    .logo-badge {
+      width: 36px;
+      height: 36px;
+      background: var(--glow-gradient);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 18px;
+      font-weight: 900;
+      font-size: 1.1rem;
       color: #fff;
-      box-shadow: 0 4px 20px var(--accent-glow);
+      box-shadow: 0 0 20px rgba(217, 70, 239, 0.4);
     }
 
-    .brand-name {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #ffffff;
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
     }
 
-    /* Hero Section */
-    .hero {
-      max-width: 850px;
-      text-align: center;
-      margin-top: 80px;
-      padding: 0 24px;
+    .nav-link:hover {
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero Main Section */
+    main {
+      width: 100%;
+      max-width: 950px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      z-index: 10;
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 80px;
+      z-index: 1;
     }
 
-    .badge {
+    /* Status Pill */
+    .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 6px 16px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(236, 72, 153, 0.2);
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 28px;
-      backdrop-filter: blur(10px);
+      border-radius: 9999px;
+      background: rgba(217, 70, 239, 0.08);
+      border: 1px solid rgba(217, 70, 239, 0.25);
+      color: #f472b6;
+      font-size: 0.825rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
     }
 
-    .badge-dot {
-      width: 6px;
-      height: 6px;
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #f472b6;
       border-radius: 50%;
-      background-color: #ec4899;
-      box-shadow: 0 0 8px #ec4899;
+      box-shadow: 0 0 10px #f472b6;
+      animation: pulse 2s infinite;
     }
 
-    /* Titel mit Lila & Rosa Farbverlauf */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Titel */
     .hero-title {
-      font-size: 64px;
-      font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1.1;
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 20px;
       text-transform: uppercase;
-      background: linear-gradient(90deg, #a855f7 0%, #d946ef 50%, #ec4899 100%);
+      background: linear-gradient(135deg, #ffffff 30%, rgba(255, 255, 255, 0.7) 60%, #d946ef 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
     }
 
-    .hero-desc {
-      font-size: 17px;
-      color: var(--text-muted);
-      line-height: 1.6;
+    .hero-description {
       max-width: 620px;
-      margin-bottom: 40px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 36px;
       font-weight: 400;
     }
 
-    /* Button Container */
-    .button-group {
+    /* Buttons */
+    .cta-group {
       display: flex;
-      gap: 16px;
-      align-items: center;
+      gap: 14px;
+      margin-bottom: 70px;
+      flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 90px;
     }
 
     .btn {
-      padding: 14px 32px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
       border: none;
     }
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraClient - Performance & PvP</title>
-    <style>
-        /* --- GRUNDSTELLUNGEN (Reset & Fonts) --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
 
-        :root {
-            --bg-color: #050509; /* Sehr dunkles Blau/Schwarz */
-            --accent-purple: #a855f7;
-            --accent-pink: #ec4899;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --card-bg: rgba(17, 17, 27, 0.6); /* Transparente Karten */
-            --glow: 0 0 20px rgba(168, 85, 247, 0.4);
-        }
+    .btn-primary {
+      background: var(--glow-gradient);
+      color: #ffffff;
+      box-shadow: 0 4px 25px rgba(217, 70, 239, 0.35);
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(217, 70, 239, 0.5);
+    }
 
-        /* --- HINTERGRUND-EFFEKTE (Neon-Kristalle & Code) --- */
-        /* Wir nutzen Pseudo-Elemente, um die Kristalle ohne Bilddateien zu simulieren */
-        body::before, body::after {
-            content: "";
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -2;
-            opacity: 0.15;
-        }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+    }
 
-        body::before {
-            background: var(--accent-purple);
-            top: 10%;
-            left: -100px;
-        }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
 
-        body::after {
-            background: var(--accent-pink);
-            bottom: 10%;
-            right: -100px;
-        }
+    /* Feature Cards Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+    }
 
-        /* Simulierter Code-Hintergrund */
-        .code-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            color: rgba(168, 85, 247, 0.03); /* Extrem subtil */
-            white-space: pre;
-            pointer-events: none;
-            z-index: -1;
-            padding: 20px;
-            overflow: hidden;
-        }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 32px 24px;
+      text-align: left;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* --- HEADER & LOGO --- */
-        header {
-            padding: 20px 40px;
-            display: flex;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-        }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(217, 70, 239, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #f1f5f9;
-        }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(217, 70, 239, 0.15);
+    }
 
-        .logo-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            color: white;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
-        }
+    .feature-card:hover::before {
+      opacity: 1;
+    }
 
-        /* --- HERO SECTION (Mitte) --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 20px;
-            padding-top: 80px; /* Platz für Header */
-        }
+    .icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(217, 70, 239, 0.1);
+      border: 1px solid rgba(217, 70, 239, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--accent-pink);
+    }
 
-        .status-badge {
-            background: rgba(236, 72, 153, 0.1);
-            color: var(--accent-pink);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border: 1px solid rgba(236, 72, 153, 0.2);
-            margin-bottom: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
+    .feature-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
 
-        .status-badge::before {
-            content: "✦"; /* Kleiner Stern */
-        }
+    .feature-card p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
 
-        .main-title {
-            font-size: 4rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            background: linear-gradient(to right, var(--accent-purple), var(--accent-pink), #ff80b3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.3));
-        }
+    /* Footer */
+    footer {
+      width: 100%;
+      max-width: 1100px;
+      padding: 30px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      z-index: 10;
+    }
 
-        .description-box {
-            max-width: 650px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 20px;
-            border-radius: 12px;
-            color: #cbd5e1;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* --- BUTTONS --- */
-        .cta-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 80px; /* Abstand zu den Karten */
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, var(--accent-purple), var(--accent-pink));
-            color: white;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #1a1a2e;
-            color: var(--text-main);
-            border: 1px solid #2e2e4d;
-        }
-
-        .btn-secondary:hover {
-            background: #252542;
-        }
-
-        /* --- FEATURES SECTION (Karten) --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1100px;
-            padding: 0 20px;
-            margin-bottom: 50px;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(168, 85, 247, 0.15);
-            border-radius: 12px;
-            padding: 30px;
-            position: relative;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(168, 85, 247, 0.4);
-            box-shadow: var(--glow);
-        }
-
-        /* Neon-Icons (simuliert mit CSS-Formen und Text) */
-        .icon-container {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px var(--accent-purple));
-        }
-
-        /* Spezifische Icons mit CSS */
-        .icon-performance { color: #60a5fa; } /* Blau */
-        .icon-allocator { color: #a855f7; }   /* Lila */
-        .icon-cosmetics { color: #ec4899; }   /* Pink */
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 12px;
-        }
-
-        .card-text {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* --- RESPONSIVE DESIGN (Handy-Anpassungen) --- */
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 2.5rem;
-            }
-            .description-box {
-                font-size: 0.9rem;
-            }
-            header {
-                padding: 15px 20px;
-            }
-        }
-    </style>
+    /* Mobile Responsive */
+    @media (max-width: 868px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      main {
+        margin-top: 20px;
+      }
+      footer {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Hintergrund Code-Effekt -->
-    <div class="code-bg">
-import minecraft.client.Minecraft;
-import minecraft.performance.Optimizer;
+  <!-- Hintergrund Effekte -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow-top"></div>
 
-// Init UltraClient Core
-public class UltraClient {
-    public static void main(String[] args) {
-        System.out.println("Loading UltraClient...");
-        Optimizer.patchRenderingPipeline();
-        Optimizer.optimizeMemoryAllocation();
-        Minecraft.getGLContext().enableLudicrousFPS();
-        // Graphics Pipeline Hook
-        // Memory Cleaner active
-        // Cosmetic Engine loaded
-    }
-}
+  <!-- Navbar -->
+  <header>
+    <a href="#" class="logo">
+      <div class="logo-badge">U</div>
+      UltraClient
+    </a>
+    <a href="https://www.tiktok.com" target="_blank" class="nav-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.22V8.2a6.34 6.34 0 0 0-5.1 6.27 6.34 6.34 0 0 0 10.8 4.49 6.27 6.27 0 0 0 1.87-4.49V8.55a8.3 8.3 0 0 0 4.54 1.34V6.45a4.86 4.86 0 0 1-2-.24z"/>
+      </svg>
+      TikTok
+    </a>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <main>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      IN ARBEIT &bull; DEVELOPMENT
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="logo-container">
-            <div class="logo-icon">U</div>
-            UltraClient
+    <h1 class="hero-title">ULTRA CLIENT</h1>
+
+    <p class="hero-description">
+      Der ultimative Performance- & PvP-Client für Minecraft. Maximale FPS, 
+      clevere Quality-of-Life-Features und ein cleanes Design für das beste Spielerlebnis.
+    </p>
+
+    <!-- Buttons -->
+    <div class="cta-group">
+      <button class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        Coming Soon
+      </button>
+
+      <a href="https://www.tiktok.com" target="_blank" class="btn btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.22V8.2a6.34 6.34 0 0 0-5.1 6.27 6.34 6.34 0 0 0 10.8 4.49 6.27 6.27 0 0 0 1.87-4.49V8.55a8.3 8.3 0 0 0 4.54 1.34V6.45a4.86 4.86 0 0 1-2-.24z"/>
+        </svg>
+        TikTok Kanal
+      </a>
+    </div>
+
+    <!-- Feature Karten -->
+    <div class="features-grid">
+      
+      <!-- Card 1 -->
+      <div class="feature-card">
+        <div class="icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
         </div>
-    </header>
+        <h3>Hyper Performance</h3>
+        <p>
+          Unsere Core-Engine restrukturiert Grafik-Pipelines im Hintergrund, um FPS-Spikes komplett zu eliminieren.
+        </p>
+      </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="status-badge">In Arbeit</div>
-        <h1 class="main-title">ULTRA CLIENT</h1>
-        
-        <div class="description-box">
-            Der ultimative Performance- & PvP-Client für Minecraft. Maximale FPS, 
-            clevere Quality-of-Life-Features und ein cleanes Design für das beste Spielerlebnis.
+      <!-- Card 2 -->
+      <div class="feature-card">
+        <div class="icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+            <rect x="9" y="9" width="6" height="6"></rect>
+            <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"></path>
+          </svg>
         </div>
+        <h3>Smart Allocator</h3>
+        <p>
+          Intelligente Speicherbereinigung blockiert unnötige Java-Prozesse und sorgt für ein ruckelfreies Erlebnis.
+        </p>
+      </div>
 
-        <div class="cta-group">
-            <button class="btn btn-primary">Coming Soon</button>
-            <a href="#" class="btn btn-secondary">TikTok</a>
+      <!-- Card 3 -->
+      <div class="feature-card">
+        <div class="icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+          </svg>
         </div>
+        <h3>Cosmetics Layer</h3>
+        <p>
+          Ein eigenständiges Render-System lädt zukünftige Capes und Flügel direkt auf die Minecraft-Engine.
+        </p>
+      </div>
 
-        <!-- Features Grid -->
-        <div class="features-grid">
-            
-            <!-- Karte 1 -->
-            <div class="feature-card">
-                <div class="icon-container icon-performance">
-                    <!-- Einfaches Tacho-Symbol mit Text -->
-                    ⏱️
-                </div>
-                <h3 class="card-title">Hyper Performance</h3>
-                <p class="card-text">
-                    Unsere Core-Engine restrukturiert Grafik-Pipelines im Hintergrund, um FPS-Spikes komplett zu eliminieren.
-                </p>
-            </div>
+    </div>
+  </main>
 
-            <!-- Karte 2 -->
-            <div class="feature-card">
-                <div class="icon-container icon-allocator">
-                    <!-- Einfaches Chip-Symbol -->
-                    🔲
-                </div>
-                <h3 class="card-title">Smart Allocator</h3>
-                <p class="card-text">
-                    Intelligente Speicherbereinigung blockiert unnötige Java-Prozesse und sorgt für ein ruckelfreies Erlebnis.
-                </p>
-            </div>
+  <!-- Footer -->
+  <footer>
+    <div>&copy; 2026 UltraClient. Alle Rechte vorbehalten.</div>
+    <div>Offizielle Website: <a href="https://dilzar55.github.io/#" style="color: var(--accent-pink); text-decoration: none;">dilzar55.github.io</a></div>
+  </footer>
 
-            <!-- Karte 3 -->
-            <div class="feature-card">
-                <div class="icon-container icon-cosmetics">
-                    <!-- Einfaches Flügel-Symbol -->
-                    👐
-                </div>
-                <h3 class="card-title">Cosmetics Layer</h3>
-                <p class="card-text">
-                    Ein eigenständiges Render-System lädt zukünftige Capes und Flügel direkt auf die Minecraft-Engine.
-                </p>
-            </div>
-
-        </div>
-    </section>
+</body>
+</html>
 
 </body>
 </html>
