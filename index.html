@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraClient | Minecraft that feels like it's truly built just for you.</title>
+    <title>UltraClient | Definitive Next-Gen Minecraft Experience</title>
     
-    <!-- Original Minecraft Pixel-Schriftart -->
+    <!-- Fonts & Icons -->
     <link href="https://cdnfonts.com" rel="stylesheet">
-    <!-- Elegante Google Fonts -->
     <link href="https://googleapis.com" rel="stylesheet">
-    <!-- FontAwesome Gaming Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
@@ -20,198 +18,255 @@
             user-select: none;
         }
         body {
-            background-color: #040406;
+            background-color: #030206;
             color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* 🌌 Geisteskranker, animierter CGI-Nebel & Rauch im Hintergrund */
-        .ambient-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 50% -20%, rgba(147, 51, 234, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 50% 120%, rgba(147, 51, 234, 0.12) 0%, transparent 50%),
-                #040406;
-            z-index: -2;
-        }
-
-        .canvas-container {
+        /* 🌌 Animierter 3D-Partikel-Flug im Hintergrund */
+        #starfield-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            opacity: 0.45;
-            filter: blur(40px);
-            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, #0c061f 0%, #030206 100%);
         }
 
-        /* 📱 High-End NoRisk Navbar */
+        /* 📱 Tech-Navbar */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 0; width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 40px 8%;
+            padding: 25px 8%;
+            background: rgba(3, 2, 6, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(140, 82, 255, 0.2);
             z-index: 100;
         }
-        .menu-btn {
-            color: #71717a;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
+        .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            letter-spacing: 0.5px;
+            gap: 12px;
         }
-        .menu-btn:hover {
-            color: #ffffff;
-            transform: translateX(3px);
-        }
-        .menu-btn i {
-            font-size: 0.9rem;
-        }
-
-        /* ⚡ Der pulsierende, neon-violette Blitz */
-        .top-flash {
-            font-size: 1.6rem;
-            color: #a855f7;
-            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
-            animation: flashGlow 4s infinite ease-in-out;
-        }
-
-        @keyframes flashGlow {
-            0% { opacity: 0.7; transform: scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5)); }
-            50% { opacity: 1; transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(168, 85, 247, 1)); }
-            100% { opacity: 0.7; transform: scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5)); }
-        }
-
-        /* 👑 Zentrierter Premium-Inhalt */
-        .main-content {
-            text-align: center;
-            padding: 0 20px;
-            max-width: 900px;
-            z-index: 10;
-            transform: translateY(-20px);
-        }
-
-        /* Hauptüberschrift exakt formatiert */
-        .main-content h1 {
+        .pixel-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00d4ff, #8c52ff);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: 'Minecraftia', sans-serif;
-            font-size: 3.4rem;
-            line-height: 1.5;
-            font-weight: normal;
-            color: #ffffff;
-            margin-bottom: 24px;
-            letter-spacing: -0.8px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(140, 82, 255, 0.6);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        
-        .purple-glow-text {
-            color: #a855f7;
-            background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+        .brand-text {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #ffffff, #8c52ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6));
         }
 
-        /* Eleganter Untertext */
-        .main-content p {
-            color: #52525b;
-            font-size: 1.15rem;
-            line-height: 1.6;
-            max-width: 580px;
-            margin: 0 auto 50px auto;
-            font-weight: 500;
-        }
-
-        /* 🎯 Die High-End Buttons */
-        .button-wrapper {
+        /* 👑 Haupt-Dashboard */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 20px 60px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            position: relative;
+            z-index: 10;
         }
 
-        .btn-norisk {
-            background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+        .version-badge {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            font-family: 'Oxanium', sans-serif;
+            padding: 6px 18px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        h1 {
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 4.8rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffffff 50%, #b388ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 35px rgba(140, 82, 255, 0.5));
+        }
+
+        .slogan {
+            color: #94a3b8;
+            font-size: 1.35rem;
+            max-width: 700px;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        /* 🎯 Buttons */
+        .cta-box {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-prime {
+            background: linear-gradient(135deg, #8c52ff 0%, #00d4ff 100%);
             color: #ffffff;
-            font-size: 1.05rem;
-            font-weight: 600;
-            padding: 16px 42px;
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            padding: 18px 40px;
             border: none;
-            border-radius: 40px;
+            border-radius: 12px;
             cursor: not-allowed;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 0 30px rgba(140, 82, 255, 0.4);
         }
 
-        /* TikTok-Link Untertitel */
-        .btn-tiktok-sub {
-            color: #52525b;
+        .btn-social-tt {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            padding: 18px 35px;
+            border-radius: 12px;
             text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .btn-tiktok-sub:hover {
-            color: #ff0050;
-            transform: scale(1.02);
-            text-shadow: 0 0 15px rgba(255, 0, 80, 0.4);
+        .btn-social-tt:hover {
+            background: #ff0050;
+            border-color: #ff0050;
+            transform: translateY(-4px);
+            box-shadow: 0 0 35px rgba(255, 0, 80, 0.6);
+        }
+
+        /* 📊 Grid mit Tech-Karten (Glassmorphism) */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(140, 82, 255, 0.15);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: left;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .card:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.02);
+            transform: translateY(-5px);
+            box-shadow: 0 25px 45px rgba(0, 212, 255, 0.15);
+        }
+        .card-icon {
+            font-size: 2.2rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+        }
+        .card h3 {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        .card p {
+            color: #64748b;
+            line-height: 1.6;
+            font-size: 1.05rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- 🌌 CGI-Shader & Nebel-Hintergrund -->
-    <div class="ambient-glow"></div>
-    <div class="canvas-container">
-        <canvas id="smoke-canvas"></canvas>
-    </div>
+    <!-- 🌌 Interaktives 3D-Weltraum-Vakuum -->
+    <canvas id="starfield-canvas"></canvas>
 
-    <!-- Navigationsleiste -->
+    <!-- Navigation -->
     <nav>
-        <div class="menu-btn"><i class="fa-solid fa-bars"></i> Menu</div>
-        <div class="top-flash"><i class="fa-solid fa-bolt"></i></div>
-        <div style="width: 80px;"></div>
+        <div class="brand">
+            <div class="pixel-logo">U</div>
+            <div class="brand-text">UltraClient</div>
+        </div>
     </nav>
 
-    <!-- Hauptbereich -->
-    <div class="main-content">
-        <h1>Minecraft that feels like it's truly <br><span class="purple-glow-text">built just for you.</span></h1>
-        <p>Everything you need to make Minecraft feel fresh, personal, and exciting again.</p>
+    <!-- Main Section -->
+    <div class="wrapper">
+        <div class="version-badge">// CODEBASE ALPHA ONLINE</div>
+        <h1>ULTRA CLIENT</h1>
+        <p class="slogan">Die Evolution des Minecraft-Gamings. Maximale FPS-Ausbeute, intelligentes RAM-Management und ein hochentwickeltes Ecosystem, perfekt abgestimmt auf deine Performance.</p>
         
-        <div class="button-wrapper">
-            <button class="btn-norisk" onclick="alert('UltraClient befindet sich aktuell in der Entwicklung! Check unser TikTok für exklusive Leaks!')">
-                <i class="fa-solid fa-download"></i> Start Playing
+        <div class="cta-box">
+            <button class="btn-prime" onclick="alert('UltraClient wird gerade im Hintergrund programmiert! Verpasse keine Leaks auf TikTok!')">
+                <i class="fa-solid fa-terminal"></i> LAUNCHER IN ARBEIT
             </button>
-            
-            <a href="https://tiktok.com" target="_blank" class="btn-tiktok-sub">
-                <i class="fa-brands fa-tiktok"></i> Follow @ultraclient2026 for Dev-Logs
+            <a href="https://tiktok.com" target="_blank" class="btn-social-tt">
+                <i class="fa-brands fa-tiktok"></i> @ultraclient2026
             </a>
+        </div>
+
+        <!-- Tech Cards Grid -->
+        <div class="feature-grid">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                <h3>Hyper Performance</h3>
+                <p>Unsere Core-Engine restrukturiert Grafik-Pipelines im Hintergrund, um FPS-Spikes komplett zu eliminieren.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                <h3>Smart Allocator</h3>
+                <p>Intelligente Speicherbereinigung blockiert unnötige Java-Prozesse und sorgt für ein ruckelfreies Erlebnis.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Cosmetics Layer</h3>
+                <p>Ein eigenständiges Render-System lädt zukünftige Capes und Flügel direkt auf die Minecraft-Engine.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Script für den animierten Rauch im Hintergrund -->
+    <!-- 3D Starfield Simulation Skript -->
     <script>
-        const canvas = document.getElementById('smoke-canvas');
+        const canvas = document.getElementById('starfield-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
@@ -221,51 +276,14 @@
             height = canvas.height = window.innerHeight;
         });
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 150 + 100;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
-                this.angle = Math.random() * Math.PI * 2;
-                this.spin = Math.random() * 0.002 - 0.001;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.angle += this.spin;
-                if (this.x < -this.size) this.x = width + this.size;
-                if (this.x > width + this.size) this.x = -this.size;
-                if (this.y < -this.size) this.y = height + this.size;
-                if (this.y > height + this.size) this.y = -this.size;
-            }
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
-                const gradient = ctx.createRadialGradient(0, 0, 10, 0, 0, this.size);
-                gradient.addColorStop(0, 'rgba(147, 51, 234, 0.08)');
-                gradient.addColorStop(0.5, 'rgba(59, 130, 246, 0.03)');
-                gradient.addColorStop(1, 'transparent');
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        const particles = Array.from({ length: 15 }, () => new Particle());
+        const numStars = 120;
+        const stars = Array.from({ length: numStars }, () => ({
+            x: Math.random() * width - width / 2,
+            y: Math.random() * height - height / 2,
+            z: Math.random() * width,
+            o: Math.random()
+        }));
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-</body>
-</html>
-
-
+            ctx.fillStyle = "rgba(255, 255, 255, ";
