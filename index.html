@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraClient | Next-Gen Minecraft Client Experience</title>
+    <title>UltraClient | A modpack for modern versions of Minecraft!</title>
     
-    <!-- Professionelle Google Gaming-Fonts -->
+    <!-- Einbindung der Minecraft-Schriftart und Google Fonts -->
     <link href="https://cdnfonts.com" rel="stylesheet">
     <link href="https://googleapis.com" rel="stylesheet">
-    <!-- FontAwesome für moderne Gaming-Icons -->
+    <!-- FontAwesome für Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
-        /* 100% Komplett neues CSS-Layout */
+        /* Lunar Client Layout Nachbau */
         * {
             margin: 0;
             padding: 0;
@@ -20,274 +20,204 @@
             user-select: none;
         }
         body {
-            background-color: #020205;
-            color: #f1f5f9;
-            font-family: 'Rajdhani', sans-serif;
+            background-color: #0b0b0d;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* 🌐 Interaktives Partikel-Netzwerk im Hintergrund */
-        #particles-js {
+        /* 🌲 Epischer Minecraft Shader Hintergrund im Lunar-Stil */
+        .lunar-hero-bg {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            z-index: 1;
-            background: radial-gradient(circle at 50% 50%, #0b071e 0%, #020205 100%);
+            width: 100%;
+            height: 100%;
+            /* Hochauflösendes Minecraft Nacht-Shader Bild */
+            background: linear-gradient(rgba(11, 11, 13, 0.4), rgba(11, 11, 13, 0.75)), 
+                        url('https://unsplash.com') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            filter: brightness(0.85) contrast(1.05);
         }
 
-        /* 📱 High-End Navigation im Esports-Look */
+        /* 📱 Die originale obere Menüleiste (Navbar) */
         nav {
             position: fixed;
-            top: 0; width: 100%;
+            top: 0;
+            width: 100%;
+            height: 70px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
-            background: rgba(2, 2, 5, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 2px solid rgba(140, 82, 255, 0.3);
+            padding: 0 6%;
+            background: #111115;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 100;
         }
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         .logo-box {
-            width: 46px;
-            height: 46px;
-            background: linear-gradient(135deg, #00d4ff, #8c52ff);
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #8c52ff, #451a99);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Minecraftia', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: #ffffff;
-            box-shadow: 0 0 25px rgba(140, 82, 255, 0.8);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .logo-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            background: linear-gradient(90deg, #ffffff 30%, #00d4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            color: #ffffff;
         }
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 35px;
+            gap: 24px;
         }
         .nav-links a {
-            color: #94a3b8;
+            color: #a3a3a3;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: color 0.2s;
         }
         .nav-links a:hover {
-            color: #00d4ff;
-            text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+            color: #ffffff;
         }
         .nav-links .locked {
-            color: #334155;
+            color: #4a4a4f;
             cursor: not-allowed;
         }
 
-        /* 👑 Brandneue Hero-Sektion */
-        .main-wrapper {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            min-height: 100vh;
+        /* 👑 Zentrierter Hauptbereich (Hero) */
+        .hero-content {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 140px 20px 60px 20px;
+            padding: 0 20px;
         }
 
-        .premium-tag {
-            background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), rgba(140, 82, 255, 0.2));
-            border: 1px solid #00d4ff;
-            color: #00d4ff;
-            padding: 6px 20px;
-            border-radius: 4px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-
-        .main-wrapper h1 {
+        /* Großer Minecraft-Titel */
+        .hero-content h1 {
             font-family: 'Minecraftia', sans-serif;
-            font-size: 5.5rem;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 40px rgba(140, 82, 255, 0.4));
+            font-size: 4.2rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            letter-spacing: -1px;
         }
 
-        .main-wrapper p {
-            color: #94a3b8;
-            font-size: 1.5rem;
-            max-width: 750px;
-            line-height: 1.5;
-            margin-bottom: 45px;
-            font-weight: 500;
+        /* Slogan unter der Überschrift */
+        .hero-content p {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 35px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
         }
 
-        /* 🎯 Komplett neue Gaming-Buttons */
-        .action-area {
+        /* 🎯 Die beiden Hauptbuttons genau wie Lunar */
+        .btn-group {
             display: flex;
-            gap: 25px;
+            gap: 15px;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 70px;
         }
-        .btn-dev {
-            background: #1e1b4b;
-            color: #a78bfa;
-            padding: 18px 40px;
-            font-size: 1.25rem;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            border: 1px solid #6d28d9;
-            border-radius: 8px;
+        
+        .btn-download {
+            background-color: #3b82f6;
+            color: #ffffff;
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             cursor: not-allowed;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: inset 0 0 15px rgba(109, 40, 217, 0.3);
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: background-color 0.2s;
         }
-        .btn-tiktok-glow {
-            background: linear-gradient(135deg, #ff0050 0%, #00f2fe 100%);
-            color: #ffffff;
-            padding: 18px 40px;
-            font-size: 1.25rem;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
+
+        .btn-tiktok {
+            background-color: #ffffff;
+            color: #111115;
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 0 30px rgba(255, 0, 80, 0.4);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s, background-color 0.2s;
         }
-        .btn-tiktok-glow:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 0 50px rgba(0, 242, 254, 0.8);
-        }
-
-        /* 📊 Esports-Style Dashboard Boxen (Glassmorphism) */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 20px;
-        }
-        .dash-card {
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-        .dash-card:hover {
-            border-color: #00d4ff;
-            background: rgba(0, 212, 255, 0.02);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
-        }
-        .dash-card i {
-            font-size: 2.2rem;
-            color: #8c52ff;
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(140, 82, 255, 0.5);
-        }
-        .dash-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-        .dash-desc {
-            color: #64748b;
-            font-size: 1.05rem;
-            font-weight: 600;
+        .btn-tiktok:hover {
+            background-color: #f3f4f6;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <!-- 🌌 Interaktiver Sternen-Hintergrund -->
-    <div id="particles-js"></div>
+    <!-- Lunar Background -->
+    <div class="lunar-hero-bg"></div>
 
-    <!-- 📱 Esports Navigationsleiste -->
+    <!-- Menüleiste ganz oben -->
     <nav>
         <div class="logo-area">
             <div class="logo-box">U</div>
-            <div class="logo-title">UltraClient</div>
+            <div class="logo-title">ULTRA CLIENT</div>
         </div>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
-            <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Cosmetics</a></li>
             <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Store</a></li>
-            <li><a href="https://www.tiktok.com/@ultraclient2026" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a></li>
+            <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Cosmetics</a></li>
+            <li><a href="https://tiktok.com" target="_blank">TikTok</a></li>
         </ul>
     </nav>
 
-    <!-- 👑 Hauptinhalt -->
-    <div class="main-wrapper">
-        <div class="premium-tag">// ALPHA PHASE INCOMING</div>
-        <h1>UltraClient</h1>
-        <p>Der neue Maßstab für Performance und Gameplay in Minecraft. Erlebe maximale FPS-Stabilität, hochentwickelten Code und ein vollständig anpassbares Interface.</p>
+    <!-- Hauptbereich Mitte -->
+    <div class="hero-content">
+        <h1>ULTRA CLIENT</h1>
+        <p>A modpack for all modern versions of Minecraft!</p>
         
-        <div class="action-area">
-            <button class="btn-dev" onclick="alert('Unser Launcher wird im Hintergrund gecodet! Verfolge alle Updates live auf TikTok!')">
-                <i class="fa-solid fa-gears"></i> LAUNCHER UNDER DEVELOPMENT
+        <div class="btn-group">
+            <button class="btn-download" onclick="alert('Wir programmieren den Launcher aktuell im Hintergrund! Alle Infos auf TikTok!')">
+                <i class="fa-solid fa-download"></i> Download
             </button>
-            
-            <!-- Dein echter, funktionierender TikTok-Link -->
-            <a href="https://www.tiktok.com/@ultraclient2026" target="_blank" class="btn-tiktok-glow">
-                <i class="fa-brands fa-tiktok"></i> FOLLOW TIKTOK
+            <a href="https://tiktok.com" target="_blank" class="btn-tiktok">
+                <i class="fa-brands fa-tiktok"></i> TikTok Store
             </a>
         </div>
+    </div>
 
-        <!-- 📊 Komplett neues Feature-Gitter im Lunar-Style -->
-        <div class="dashboard-grid">
-            <div class="dash-card">
-                <i class="fa-solid fa-bolt"></i>
-                <div class="dash-title">MAX FPS</div>
-                <div class="dash-desc">Engine Optimierung</div>
-            </div>
-            <div class="dash-card">
-                <i class="fa-solid fa-microchip"></i>
+</body>
+</html>
+
 
 
 
