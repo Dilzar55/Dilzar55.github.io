@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraClient | Next-Gen Minecraft Launcher</title>
+    <title>UltraClient | Next-Gen Minecraft Client Experience</title>
     
-    <!-- Schriftarten & Icons -->
+    <!-- Professionelle Google Gaming-Fonts -->
     <link href="https://cdnfonts.com" rel="stylesheet">
     <link href="https://googleapis.com" rel="stylesheet">
+    <!-- FontAwesome für moderne Gaming-Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
+        /* 100% Komplett neues CSS-Layout */
         * {
             margin: 0;
             padding: 0;
@@ -18,273 +20,274 @@
             user-select: none;
         }
         body {
-            background-color: #030208;
-            color: #ffffff;
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: #020205;
+            color: #f1f5f9;
+            font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* 🌌 Epischer, animierter CGI-Weltraum-Hintergrund */
-        .cosmic-bg {
+        /* 🌐 Interaktives Partikel-Netzwerk im Hintergrund */
+        #particles-js {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(140, 82, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
-                linear-gradient(145deg, #070412 0%, #030208 100%);
-            z-index: -2;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: radial-gradient(circle at 50% 50%, #0b071e 0%, #020205 100%);
         }
 
-        /* Animierte Hyperraum-Sterne */
-        .stars-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 45px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
-            background-size: 550px 550px, 350px 350px;
-            background-position: 0 0, 40px 60px;
-            opacity: 0.25;
-            animation: warpSpeed 90s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes warpSpeed {
-            from { background-position: 0 0, 40px 60px; }
-            to { background-position: 550px 1100px, 350px 700px; }
-        }
-
-        /* 📱 High-Tech Navigationsleiste */
+        /* 📱 High-End Navigation im Esports-Look */
         nav {
             position: fixed;
             top: 0; width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 6%;
-            background: rgba(3, 2, 8, 0.6);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(140, 82, 255, 0.2);
+            padding: 20px 10%;
+            background: rgba(2, 2, 5, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(140, 82, 255, 0.3);
             z-index: 100;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
         }
-        .logo-container {
+        .logo-area {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
-        /* 🟪 COOLE NEON-PIXEL-U LOGO BOX */
-        .nav-logo-box {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #8c52ff, #451a99);
-            border-radius: 10px;
+        .logo-box {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, #00d4ff, #8c52ff);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Minecraftia', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #ffffff;
-            border: 2px solid #00d4ff;
-            box-shadow: 0 0 20px rgba(140, 82, 255, 0.7);
-            text-shadow: 0 0 8px #00d4ff;
+            box-shadow: 0 0 25px rgba(140, 82, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .logo-text {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, #ffffff, #8c52ff);
+        .logo-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #ffffff 30%, #00d4ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 35px;
         }
         .nav-links a {
             color: #94a3b8;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
         .nav-links a:hover {
-            color: #8c52ff;
-            text-shadow: 0 0 10px rgba(140, 82, 255, 0.5);
+            color: #00d4ff;
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
         }
         .nav-links .locked {
-            color: #47475a;
+            color: #334155;
             cursor: not-allowed;
         }
 
-        /* 👑 Hero-Sektion */
-        .hero {
+        /* 👑 Brandneue Hero-Sektion */
+        .main-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 150px 20px 80px 20px;
-            position: relative;
+            padding: 140px 20px 60px 20px;
         }
 
-        /* Pulsierender Cyber-Badge */
-        .cyber-badge {
-            background: linear-gradient(90deg, rgba(140, 82, 255, 0.1), rgba(0, 212, 255, 0.1));
-            border: 1px solid #8c52ff;
-            color: #d6c2ff;
-            padding: 8px 24px;
-            border-radius: 50px;
-            font-size: 0.8rem;
+        .premium-tag {
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), rgba(140, 82, 255, 0.2));
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            padding: 6px 20px;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(140, 82, 255, 0.3);
-            margin-bottom: 35px;
-            animation: cyberPulse 2.5s infinite alternate;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
         }
 
-        @keyframes cyberPulse {
-            0% { box-shadow: 0 0 15px rgba(140, 82, 255, 0.2); border-color: #8c52ff; }
-            100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.5); border-color: #00d4ff; }
-        }
-
-        /* Große Minecraft-Überschrift */
-        .hero h1 {
+        .main-wrapper h1 {
             font-family: 'Minecraftia', sans-serif;
             font-size: 5.5rem;
-            margin-bottom: 25px;
-            background: linear-gradient(to bottom, #ffffff 40%, #a855f7 100%);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 35px rgba(140, 82, 255, 0.5));
+            filter: drop-shadow(0 0 40px rgba(140, 82, 255, 0.4));
         }
 
-        .hero p {
+        .main-wrapper p {
             color: #94a3b8;
-            font-size: 1.35rem;
-            max-width: 700px;
-            line-height: 1.7;
-            margin-bottom: 50px;
+            font-size: 1.5rem;
+            max-width: 750px;
+            line-height: 1.5;
+            margin-bottom: 45px;
+            font-weight: 500;
         }
 
-        /* 🎯 Premium Buttons */
-        .btn-group {
+        /* 🎯 Komplett neue Gaming-Buttons */
+        .action-area {
             display: flex;
             gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 70px;
         }
-        .btn-launcher {
-            background: linear-gradient(135deg, #8c52ff 0%, #451a99 100%);
-            color: rgba(255,255,255,0.7);
-            padding: 20px 45px;
-            font-size: 1.2rem;
+        .btn-dev {
+            background: #1e1b4b;
+            color: #a78bfa;
+            padding: 18px 40px;
+            font-size: 1.25rem;
             font-weight: 700;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid #6d28d9;
+            border-radius: 8px;
             cursor: not-allowed;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: inset 0 0 15px rgba(109, 40, 217, 0.3);
         }
-        .btn-tiktok-premium {
-            background: #ffffff;
-            color: #000000;
-            padding: 20px 40px;
-            font-size: 1.2rem;
+        .btn-tiktok-glow {
+            background: linear-gradient(135deg, #ff0050 0%, #00f2fe 100%);
+            color: #ffffff;
+            padding: 18px 40px;
+            font-size: 1.25rem;
             font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
             border: none;
-            border-radius: 16px;
+            border-radius: 8px;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s;
+            box-shadow: 0 0 30px rgba(255, 0, 80, 0.4);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .btn-tiktok-premium:hover {
-            transform: translateY(-5px) scale(1.03);
-            background: #ff0050;
-            color: #ffffff;
-            box-shadow: 0 15px 35px rgba(255, 0, 80, 0.6);
+        .btn-tiktok-glow:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 50px rgba(0, 242, 254, 0.8);
         }
 
-        /* 📊 Sci-Fi Statistik-Gitter */
-        .stats-grid {
-            display: flex;
+        /* 📊 Esports-Style Dashboard Boxen (Glassmorphism) */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+        .dash-card {
             background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(140, 82, 255, 0.2);
-            padding: 30px 70px;
-            border-radius: 28px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 0 20px rgba(140, 82, 255, 0.1);
-        }
-        .stat-divider {
-            width: 1px;
-            background: linear-gradient(to bottom, transparent, rgba(140, 82, 255, 0.5), transparent);
-        }
-        .stat-item {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px 20px;
             text-align: center;
-            padding: 0 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
-        .stat-number {
-            font-family: 'Syncopate', sans-serif;
+        .dash-card:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.02);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+        .dash-card i {
             font-size: 2.2rem;
-            font-weight: 700;
-            color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            color: #8c52ff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(140, 82, 255, 0.5);
         }
-        .stat-label {
-            font-size: 0.85rem;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 8px;
+        .dash-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
             font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .dash-desc {
+            color: #64748b;
+            font-size: 1.05rem;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <div class="cosmic-bg"></div>
-    <div class="stars-overlay"></div>
+    <!-- 🌌 Interaktiver Sternen-Hintergrund -->
+    <div id="particles-js"></div>
 
+    <!-- 📱 Esports Navigationsleiste -->
     <nav>
-        <div class="logo-container">
-            <!-- 🟪 HIER IST JETZT DAS DEFENITIVE COODE PIXEL U -->
-            <div class="nav-logo-box">U</div>
-            <span class="logo-text">UltraClient</span>
+        <div class="logo-area">
+            <div class="logo-box">U</div>
+            <div class="logo-title">UltraClient</div>
         </div>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Cosmetics</a></li>
             <li><a href="#" class="locked"><i class="fa-solid fa-lock"></i> Store</a></li>
-            <li><a href="https://tiktok.com" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a></li>
+            <li><a href="https://www.tiktok.com/@ultraclient2026" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a></li>
         </ul>
     </nav>
 
-    <div class="hero">
-        <div class="cyber-badge">🛸 Alpha Phase Gestartet</div>
+    <!-- 👑 Hauptinhalt -->
+    <div class="main-wrapper">
+        <div class="premium-tag">// ALPHA PHASE INCOMING</div>
         <h1>UltraClient</h1>
-        <p>Der fortschrittlichste Minecraft Launcher der nächsten Generation. Erlebe maximale Stabilität, ein cleanes Interface und exklusive Cosmetics.</p>
+        <p>Der neue Maßstab für Performance und Gameplay in Minecraft. Erlebe maximale FPS-Stabilität, hochentwickelten Code und ein vollständig anpassbares Interface.</p>
         
-        <div class="btn-group">
-            <button class="btn-launcher" onclick="alert('Unser Entwickler-Team codet den Launcher gerade im Hintergrund!')">
+        <div class="action-area">
+            <button class="btn-dev" onclick="alert('Unser Launcher wird im Hintergrund gecodet! Verfolge alle Updates live auf TikTok!')">
+                <i class="fa-solid fa-gears"></i> LAUNCHER UNDER DEVELOPMENT
+            </button>
+            
+            <!-- Dein echter, funktionierender TikTok-Link -->
+            <a href="https://www.tiktok.com/@ultraclient2026" target="_blank" class="btn-tiktok-glow">
+                <i class="fa-brands fa-tiktok"></i> FOLLOW TIKTOK
+            </a>
+        </div>
+
+        <!-- 📊 Komplett neues Feature-Gitter im Lunar-Style -->
+        <div class="dashboard-grid">
+            <div class="dash-card">
+                <i class="fa-solid fa-bolt"></i>
+                <div class="dash-title">MAX FPS</div>
+                <div class="dash-desc">Engine Optimierung</div>
+            </div>
+            <div class="dash-card">
+                <i class="fa-solid fa-microchip"></i>
+
 
 
